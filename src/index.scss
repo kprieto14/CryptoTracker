@@ -29,10 +29,22 @@ div {
 
 article {
   color: #8ba0a4;
+
+  // &:hover {
+  //   border-color: #183e4b;
+  // }
+}
+
+main {
   border: solid 3px #8ba0a4;
   border-radius: 2rem;
+  padding: 1rem;
+}
 
-  &:hover {
-    border-color: #183e4b;
-  }
+li, ul {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, .6rem);
+  list-style: none;
+  padding-inline-start: 0;
 }

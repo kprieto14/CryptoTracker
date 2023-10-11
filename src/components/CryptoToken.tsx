@@ -5,20 +5,28 @@ type Token = {
     rank: string | number,
     symbol: string,
     name: string,
-    supply: number | string,
-    maxSupply: number | string | null,
     marketCapUsd: number | string,
     volumeUsd24Hr: number | string,
     priceUsd: number |string,
     changePercent24Hr: number | string,
-    vwap24hr: number | string | null,
     explorer: string | null
 }
 
-export function CryptoToken(props: Token) {
+export function CryptoToken({ rank, symbol, name, marketCapUsd, volumeUsd24Hr, priceUsd, changePercent24Hr, explorer}: Token) {
     return (
         <article>
-            {props.name}
+            <ul>
+                <li>{rank}</li>
+                <li><a href={explorer !== null ? explorer : ''}>{name} {symbol}</a></li>
+                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
+                <li>{changePercent24Hr}</li>
+                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
+                <li>{priceUsd}</li>
+                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
+                <li>{marketCapUsd}</li>
+                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
+                <li>{volumeUsd24Hr}</li>
+            </ul>
         </article>
     )
 }

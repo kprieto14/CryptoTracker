@@ -12,6 +12,15 @@ export function App() {
       </header>
 
       <main>
+        <ul className='table-header'>
+          <li>#</li>
+          <li>Name</li>
+          <li>24Hr % Change</li>
+          <li>Price</li>
+          <li>Market Cap</li>
+          <li>Volume</li>
+        </ul>
+
         {tokens.data.map(coin => (
           <CryptoToken
             key={coin.rank}
@@ -19,13 +28,10 @@ export function App() {
             rank={coin.rank}
             symbol={coin.symbol}
             name={coin.name}
-            supply={coin.supply}
-            maxSupply={coin.maxSupply}
             marketCapUsd={coin.marketCapUsd}
             volumeUsd24Hr={coin.volumeUsd24Hr}
             priceUsd={coin.priceUsd}
             changePercent24Hr={coin.changePercent24Hr}
-            vwap24hr={coin.vwap24Hr}
             explorer={coin.explorer}
           />
         ))}
