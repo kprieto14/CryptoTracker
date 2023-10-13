@@ -15,8 +15,8 @@ export function App() {
         <ul className='table-header'>
           <li>#</li>
           <li>Name</li>
-          <li>24Hr % Change</li>
-          <li>Price</li>
+          <li>24Hr %</li>
+          <li className='grid-center'>Price</li>
           <li>Market Cap</li>
           <li>Volume</li>
         </ul>

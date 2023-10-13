@@ -5,28 +5,26 @@ type Token = {
     rank: string | number,
     symbol: string,
     name: string,
-    marketCapUsd: number | string,
-    volumeUsd24Hr: number | string,
-    priceUsd: number |string,
-    changePercent24Hr: number | string,
+    marketCapUsd: string,
+    volumeUsd24Hr: string,
+    priceUsd: string,
+    changePercent24Hr: string,
     explorer: string | null
 }
 
 export function CryptoToken({ rank, symbol, name, marketCapUsd, volumeUsd24Hr, priceUsd, changePercent24Hr, explorer}: Token) {
+    function roundDecimal(num: string) {
+        return parseFloat(num).toFixed(2)
+    }
+    
     return (
-        <article>
-            <ul>
-                <li>{rank}</li>
-                <li><a href={explorer !== null ? explorer : ''}>{name} {symbol}</a></li>
-                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
-                <li>{changePercent24Hr}</li>
-                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
-                <li>{priceUsd}</li>
-                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
-                <li>{marketCapUsd}</li>
-                {/* Call a function that will parse string into an int and round to the nearest 2 decimals */}
-                <li>{volumeUsd24Hr}</li>
-            </ul>
-        </article>
+        <ul className="crypto-token">
+            <li>{rank}</li>
+            <li><a href={explorer !== null ? explorer : ''}>{name} {symbol}</a></li>
+            <li className={roundDecimal(changePercent24Hr) > '0' ? 'positive' : 'negative'}>{roundDecimal(changePercent24Hr)}</li>
+            <li className='grid-center'>${roundDecimal(priceUsd)}</li>
+            <li>{roundDecimal(marketCapUsd)}</li>
+            <li>{roundDecimal(volumeUsd24Hr)}</li>
+        </ul>
     )
 }

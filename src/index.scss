@@ -12,6 +12,20 @@ body {
   min-height: 100%;
 }
 
+a {
+  color: #183e4b;
+  text-decoration: none;
+  
+  &:hover{
+    color: #68a0a6;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: #183e4b;
+  }
+}
+
 h1, h2, h3 {
   margin: 0;
   color: #183e4b;
@@ -27,24 +41,42 @@ div {
   padding: 2rem 1rem;
 }
 
-article {
-  color: #8ba0a4;
-
-  // &:hover {
-  //   border-color: #183e4b;
-  // }
-}
-
 main {
   border: solid 3px #8ba0a4;
   border-radius: 2rem;
-  padding: 1rem;
+  padding: 2rem 3rem;
+  max-width: 55rem;
 }
 
 li, ul {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr) repeat(2, 2fr) 1fr;
   grid-template-rows: repeat(5, .6rem);
   list-style: none;
   padding-inline-start: 0;
+  padding-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.crypto-token {
+  color: #8ba0a4;
+}
+
+.grid-center {
+  padding-left: 2rem;
+}
+
+.positive {
+  color: #007f4e;
+}
+
+.negative {
+  color: #d74a49;
+}
+
+.table-header {
+  color: #1b4552;
+  font-size: 1.25rem;
+  white-space: nowrap;
 }
