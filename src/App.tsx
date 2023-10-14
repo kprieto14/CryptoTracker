@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { CryptoToken } from './components/CryptoToken'
-//import tokens from './tokens.json'
 
 type TokenData = {
   id: string,
@@ -17,28 +16,49 @@ type TokenData = {
 export function App() {
   //Tells React how the token data will look
   const [data, setData] = useState<TokenData[]>([])
+  //Starts a count that will be updated 
+  const [count, setCount] = useState<number>(0)
 
-  //Fetch the API data for when the page first loads with useEffect
-  useEffect(function() {
-    async function loadTokenData() {
+  function loadTokenData() {
+    async function fetchData() {
       const response = await fetch(
         `https://api.coincap.io/v2/assets`
       )
-
+  
       if(response.ok) {
         const tokenJson = await response.json()
-
+  
         setData(tokenJson.data)
       }
     }
-    loadTokenData()
-  }, [])
+
+    fetchData()
+  }
+  //Fetch the API data for when the count changes
+  useEffect(loadTokenData, [count])
+  
+  //Another useEffect for timer, gets called everytime the count is changed (AKA every 10 seconds due to timer interval)
+  useEffect(function(){
+    const timerInterval = setInterval(function() {
+      //Double checks the count increases every 10 seconds
+      console.log(count)
+      setCount(count + 1)
+    }, 10000)
+
+    function tearDown() {
+      clearInterval(timerInterval)
+    }
+
+    return tearDown
+  }, [count])
+
 
   return (
     <div>
       <header>
         <h1>Crypto Tracker</h1>
-        <h2>Timer: Refreshing every 10 seconds</h2>
+        <h2>Refreshing every 10 seconds</h2>
+        <p>(Even if the price does not actually change)</p>
       </header>
 
       <main>
