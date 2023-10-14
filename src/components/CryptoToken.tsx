@@ -1,6 +1,6 @@
 import React from "react";
 
-type Token = {
+type TokenProps = {
     id: string,
     rank: string | number,
     symbol: string,
@@ -12,7 +12,7 @@ type Token = {
     explorer: string | null
 }
 
-export function CryptoToken({ rank, symbol, name, marketCapUsd, volumeUsd24Hr, priceUsd, changePercent24Hr, explorer}: Token) {
+export function CryptoToken({ rank, symbol, name, marketCapUsd, volumeUsd24Hr, priceUsd, changePercent24Hr, explorer}: TokenProps) {
     function roundDecimal(num: string) {
         return parseFloat(num).toFixed(2)
     }
