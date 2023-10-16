@@ -34,7 +34,7 @@ export function App() {
 
     fetchData()
   }
-  //Fetch the API data for when the count changes
+  //Fetch the API data when page is first loaded
   useEffect(loadTokenData, [])
 
    //Another useEffect to render a timer to show when the API refreshes
