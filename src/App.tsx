@@ -16,8 +16,8 @@ type TokenData = {
 export function App() {
   //Tells React how the token data will look
   const [data, setData] = useState<TokenData[]>([])
-  //Starts a count that will be updated 
-  const [count, setCount] = useState<number>(0)
+  //Start a timer
+  const [timer, setTimer] = useState<number>(10);
 
   function loadTokenData() {
     async function fetchData() {
@@ -35,29 +35,30 @@ export function App() {
     fetchData()
   }
   //Fetch the API data for when the count changes
-  useEffect(loadTokenData, [count])
-  
-  //Another useEffect for timer, gets called everytime the count is changed (AKA every 10 seconds due to timer interval)
-  useEffect(function(){
-    const timerInterval = setInterval(function() {
-      //Double checks the count increases every 10 seconds
-      console.log(count)
-      setCount(count + 1)
-    }, 10000)
+  useEffect(loadTokenData, [])
 
-    function tearDown() {
-      clearInterval(timerInterval)
+   //Another useEffect to render a timer to show when the API refreshes
+   useEffect(() => {
+    //Reset timer to 10 when it reaches 0 and calls function to reset API and exit early
+    if( timer === 0 ) {
+       setTimer(10)
+       loadTokenData()
+       return
     }
+    
+    const timerInterval = setInterval(() => {
+      setTimer(timer - 1);
+    }, 1000);
 
-    return tearDown
-  }, [count])
-
+    // clear interval on re-render to avoid memory leaks
+    return () => clearInterval(timerInterval);
+  }, [timer]);
 
   return (
     <div>
       <header>
         <h1>Crypto Tracker</h1>
-        <h2>Refreshing every 10 seconds</h2>
+        <h2>Refreshing in the next {timer} seconds</h2>
         <p>(Even if the price does not actually change)</p>
       </header>
 
